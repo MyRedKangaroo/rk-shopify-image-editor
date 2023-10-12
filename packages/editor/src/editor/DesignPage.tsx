@@ -283,8 +283,8 @@ const DesignPage: ForwardRefRenderFunction<HTMLDivElement, PageProps> = (
                     },
                 }}
             >
-                <div css={{ flexGrow: 1 }}>Page {pageIndex + 1}</div>
-                <div
+                {/* <div css={{ flexGrow: 1 }}>Page {pageIndex + 1}</div> */}
+                {/* <div
                     css={{
                         display: 'flex',
                         alignItems: 'center',
@@ -426,7 +426,7 @@ const DesignPage: ForwardRefRenderFunction<HTMLDivElement, PageProps> = (
                     >
                         <FilePlusIcon />
                     </div>
-                </div>
+                </div> */}
             </div>
             <div
                 ref={ref}
