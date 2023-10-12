@@ -1,0 +1,27 @@
+{
+  "name": "@lidojs/core",
+  "version": "0.0.5",
+  "type": "module",
+  "types": "dist/packages/core/src/index.d.ts",
+  "module": "dist/index.js",
+  "scripts": {
+    "clean": "rimraf -rf dist",
+    "build": "npm run clean && rollup -c"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lidojs/canva-clone.git"
+  },
+  "homepage": "https://lidojs.com",
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "peerDependencies": {
+    "react": "^18"
+  }
+
+}

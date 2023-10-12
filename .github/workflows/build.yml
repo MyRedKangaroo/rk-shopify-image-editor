@@ -1,0 +1,54 @@
+name: LidoJS
+
+on:
+  push:
+    branches:
+      - master
+  create:
+    tags:
+      - 'v*'
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+    branches:
+      - 'release/**'
+
+jobs:
+
+  deploy_alpha:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: AKIA4ZMMVFQIDLAC5MFP
+          aws-secret-access-key: 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
+          aws-region: us-east-2
+
+
+      - name: Deploy to bucket
+        run: aws s3 sync demo/dist s3://demo.lidojs/ --delete --exclude "*.map"
+
+      - name: Invalidate dashboard cloudfront
+        run: aws cloudfront create-invalidation --distribution-id E17KFPMCL6B0UN --paths "/*"

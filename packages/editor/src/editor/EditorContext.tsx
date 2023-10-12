@@ -1,0 +1,15 @@
+import { createContext } from 'react';
+import { EditorActions, EditorQuery, EditorState, GetFontQuery } from '@lidojs/editor';
+import { FontData } from '@lidojs/core';
+export type EditorConfig = {
+    assetPath: string;
+};
+export type EditorContext = {
+    getState: () => EditorState;
+    query: EditorQuery;
+    actions: EditorActions;
+    getFonts: (query: GetFontQuery) => Promise<FontData[]>;
+    config: EditorConfig;
+};
+
+export const EditorContext = createContext<EditorContext>({} as EditorContext);

@@ -1,0 +1,26 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "extends": ["plugin:react/recommended", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "rules": {
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ],
+        "react/prop-types": "off",
+        "react/no-unknown-property": ["error", { "ignore": ["css"] }]
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
+}

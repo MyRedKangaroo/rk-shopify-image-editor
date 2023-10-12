@@ -1,0 +1,43 @@
+{
+  "name": "@lidojs/utils",
+  "version": "0.0.3",
+  "type": "module",
+  "types": "dist/packages/utils/src/index.d.ts",
+  "module": "dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/packages/utils/src/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./color": {
+      "types": "./dist/packages/utils/src/color/index.d.ts",
+      "default": "./dist/color/index.js"
+    },
+    "./keyboard": {
+      "types": "./dist/packages/utils/src/keyboard/index.d.ts",
+      "default": "./dist/keyboard/index.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "color": [
+        "dist/packages/utils/src/color/index.d.ts"
+      ],
+      "keyboard": [
+        "dist/packages/utils/src/keyboard/index.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "clean": "rimraf -rf dist",
+    "build": "npm run clean && rollup -c"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "react-device-detect": "^2.2.3"
+  },
+  "devDependencies": {
+  }
+}
