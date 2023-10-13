@@ -73,6 +73,7 @@ export interface EditorState {
         rotate?: number;
         cursor?: CursorPosition;
     };
+    displayRef: React.RefObject<HTMLDivElement>;
 }
 
 export type CoreEditorActions = ReturnType<typeof ActionMethods>;

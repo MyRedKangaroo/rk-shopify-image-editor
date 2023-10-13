@@ -296,7 +296,7 @@ const DesignFrame: FC<DesignFrameProps> = ({ data }) => {
                                         />
                                     </div>
                                 ))}
-                                <div
+                                {/* <div
                                     css={{
                                         marginTop: 20,
                                         marginBottom: 20,
@@ -316,7 +316,7 @@ const DesignFrame: FC<DesignFrameProps> = ({ data }) => {
                                     }}
                                 >
                                     Add Page
-                                </div>
+                                </div> */}
                             </div>
                             <div
                                 css={{

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useCallback } from 'react';
 import { useSelectedLayers, useEditor } from '../hooks';
 import { TextLayerProps } from '../layers/TextLayer';
 import TextSettings from './TextSettings';
@@ -13,12 +13,14 @@ import SvgSettings from './SvgSetting';
 import { FrameLayerProps } from '../layers/FrameLayer';
 import FrameSettings from './FrameSettings';
 import { RootLayerProps } from '../layers/RootLayer';
+import { toPng } from 'html-to-image';
 
 const LayerSettings = () => {
     const { selectedLayers, selectedLayerIds } = useSelectedLayers();
-    const { actions, sidebar, isPageLocked } = useEditor((state) => ({
+    const { actions, sidebar, isPageLocked, displayRef } = useEditor((state) => ({
         sidebar: state.sidebar,
         isPageLocked: state.pages[state.activePage] && state.pages[state.activePage].layers.ROOT.data.locked,
+        displayRef: state.displayRef,
     }));
 
     const { rootLayer, textLayers, shapeLayers, svgLayers, frameLayers } = useMemo(() => {
@@ -76,6 +78,7 @@ const LayerSettings = () => {
             }
         }
     }, [sidebar, selectedLayerIds]);
+
     return (
         <div
             css={{
@@ -97,6 +100,8 @@ const LayerSettings = () => {
                 {textLayers.length > 0 && !isPageLocked && <TextSettings layers={textLayers} />}
                 <CommonSettings />
             </div>
+
+            <button>Next</button>
         </div>
     );
 };

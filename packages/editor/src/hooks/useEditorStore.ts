@@ -228,6 +228,7 @@ export const useEditorStore = () => {
         selectData: {
             status: false,
         },
+        displayRef: useRef<HTMLDivElement>(null),
     });
 
     const actions = useMemo<EditorActions>(() => {

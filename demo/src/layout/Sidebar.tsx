@@ -30,16 +30,8 @@ const tabs = [
         icon: <SquareIcon />,
     },
     {
-        name: 'Frame',
-        icon: <FrameCornersIcon />,
-    },
-    {
         name: 'Image',
         icon: <ImageIcon />,
-    },
-    {
-        name: 'Video',
-        icon: <VideoIcon />,
     },
     {
         name: 'Upload',

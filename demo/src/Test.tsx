@@ -63,7 +63,7 @@ const Test = () => {
                     maxHeight: viewPortHeight ? `${viewPortHeight}px` : 'auto',
                 }}
             >
-                <HeaderLayout openPreview={() => setOpenPreview(true)} />
+                {/* <HeaderLayout openPreview={() => setOpenPreview(true)} /> */}
                 {openPreview && <PreviewModal onClose={() => setOpenPreview(false)} />}
                 <div
                     css={{

@@ -17,6 +17,7 @@ export type EditorContext = {
     actions: EditorActions;
     getFonts: (query: GetFontQuery) => Promise<FontData[]>;
     config: EditorConfig;
+    // displayRef: React.RefObject<HTMLDivElement>;
 };
 
 export const EditorContext = createContext<EditorContext>({} as EditorContext);

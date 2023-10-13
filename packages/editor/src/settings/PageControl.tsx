@@ -19,9 +19,9 @@ const PageControl = () => {
     };
     return (
         <div css={{ display: 'flex', alignItems: 'center', padding: '0 8px', fontWeight: 700 }}>
-            <div css={{ flexGrow: 1 }}>
+            {/* <div css={{ flexGrow: 1 }}>
                 Page {activePage + 1} / {totalPages}
-            </div>
+            </div> */}
             <div
                 css={{ flexShrink: 0, display: 'grid', gridAutoFlow: 'column', gridColumnGap: 8, alignItems: 'center' }}
             >

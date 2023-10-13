@@ -1,5 +1,5 @@
 import PageElement from '../layers/core/PageElement';
-import React, { forwardRef, ForwardRefRenderFunction, Fragment, useEffect, useRef } from 'react';
+import React, { forwardRef, ForwardRefRenderFunction, Fragment, useEffect, useRef, useCallback } from 'react';
 import { useEditor, useSelectedLayers } from '../hooks';
 import PageProvider from '../layers/core/PageContext';
 import ImageEditor from '../common/image-editor/ImageEditor';
@@ -54,8 +54,9 @@ const DesignPage: ForwardRefRenderFunction<HTMLDivElement, PageProps> = (
     const [layerData, getLayerData, setLayerData] = useLinkedRef<LayerDataRef>({});
     const { selectedLayerIds, selectedLayers } = useSelectedLayers();
     const disabled = useDisabledFeatures();
-    const { actions, hoveredLayer, scale, activePage, controlBox, imageEditor, textEditor, totalPages, isLocked } =
-        useEditor((state) => {
+
+    const { actions, hoveredLayer, scale, activePage, controlBox, imageEditor, textEditor } = useEditor(
+        (state) => {
             const hoverLayerId = state.hoveredLayer[pageIndex];
             return {
                 activePage: state.activePage,
@@ -252,7 +253,14 @@ const DesignPage: ForwardRefRenderFunction<HTMLDivElement, PageProps> = (
         onRotateEnd: handleRotate,
     });
 
-    const handleDownload = async (pageIndex: number) => {
+    useEffect(() => {
+        console.log('inside design page');
+        // setInterval(() => {
+        //     window.parent?.postMessage('testing from image editor', '*');
+        // }, 3000);
+    }, []);
+
+    const handleDownload = useCallback(async (pageIndex: number = 0) => {
         if (displayRef.current) {
             try {
                 const dataUrl = await toPng(displayRef.current);
@@ -264,11 +272,12 @@ const DesignPage: ForwardRefRenderFunction<HTMLDivElement, PageProps> = (
                 window.alert('Cannot download: ' + (e as Error).message);
             }
         }
-    };
+    }, []);
 
     return (
         <PageProvider pageIndex={pageIndex}>
-            <div
+            <button onClick={() => handleDownload(pageIndex)}>download</button>
+            {/* <div
                 css={{
                     fontWeight: 'bold',
                     marginTop: 24,
@@ -427,7 +436,7 @@ const DesignPage: ForwardRefRenderFunction<HTMLDivElement, PageProps> = (
                         <FilePlusIcon />
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div
                 ref={ref}
                 css={{

@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { FC, PropsWithChildren, useRef } from 'react';
 import { EditorConfig, EditorContext } from './EditorContext';
 import { useEditorStore } from '../hooks/useEditorStore';
 import { GetFontQuery } from '@lidojs/editor';
@@ -10,6 +10,7 @@ export type EditorProps = {
 
 const Editor: FC<PropsWithChildren<EditorProps>> = ({ getFonts, config, children }) => {
     const { getState, actions, query } = useEditorStore();
+
     return (
         <EditorContext.Provider value={{ config, getState, actions, query, getFonts }}>
             {children}
