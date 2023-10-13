@@ -1,0 +1,89 @@
+{
+    "name": "design-src",
+    "version": "0.0.1",
+    "type": "module",
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "start": "cd demo && vite",
+        "build": "npm run build:source && npm run build:clearMap",
+        "build:source": "cd demo && vite build",
+        "build:clearMap": "rimraf **/*.map"
+    },
+    "devDependencies": {
+        "@babel/preset-react": "^7.22.3",
+        "@emotion/babel-plugin": "^11.11.0",
+        "@nrwl/rollup": "^16.7.2",
+        "@nx/rollup": "16.7.2",
+        "@rollup/plugin-babel": "^6.0.3",
+        "@rollup/plugin-commonjs": "^25.0.4",
+        "@rollup/plugin-eslint": "^9.0.4",
+        "@rollup/plugin-node-resolve": "^15.2.0",
+        "@rollup/plugin-typescript": "^11.1.2",
+        "@types/dompurify": "^3.0.2",
+        "@types/lodash": "^4.14.194",
+        "@types/react": "^18.0.27",
+        "@types/react-color": "^3.0.6",
+        "@types/react-dom": "^18.2.4",
+        "@types/uuid": "^9.0.1",
+        "eslint": "^8.41.0",
+        "eslint-config-prettier": "^8.8.0",
+        "eslint-config-react-app": "^7.0.1",
+        "eslint-plugin-prettier": "^4.2.1",
+        "express": "^4.18.2",
+        "rimraf": "^5.0.1",
+        "rollup-plugin-multi-input": "^1.4.1",
+        "rollup-plugin-sourcemaps": "^0.6.3",
+        "rollup-plugin-typescript2": "^0.35.0",
+        "rollup-plugin-uglify": "^6.0.4",
+        "tslib": "^2.3.0",
+        "typescript": "^5.1.6",
+        "vite": "^4.0.4",
+        "vite-plugin-eslint": "^1.8.1"
+    },
+    "dependencies": {
+        "@duyank/icons": "0.0.21",
+        "@emotion/css": "^11.11.0",
+        "@emotion/react": "^11.11.0",
+        "@emotion/styled": "^11.11.0",
+        "@fullstory/browser": "^1.7.1",
+        "@optimize-lodash/rollup-plugin": "^4.0.3",
+        "@react-spring/web": "^9.7.3",
+        "@sentry/react": "^7.63.0",
+        "@sentry/vite-plugin": "^2.6.2",
+        "axios": "^1.4.0",
+        "dompurify": "^3.0.3",
+        "html-to-image": "^1.11.11",
+        "lodash": "^4.17.21",
+        "nx": "^16.7.2",
+        "nx-cloud": "^16.4.0-beta.1",
+        "prettier": "^2.8.8",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-use": "^17.4.0",
+        "rollup-plugin-peer-deps-external": "^2.2.4",
+        "rollup-plugin-visualizer": "^5.9.2",
+        "vite-plugin-ejs": "^1.6.4",
+        "write-json-file": "^5.0.0"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "workspaces": [
+        "packages/*"
+    ]
+}

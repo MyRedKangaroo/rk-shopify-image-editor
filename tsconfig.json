@@ -1,0 +1,37 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "composite": true,
+        "allowJs": true,
+        "importHelpers": true,
+        "useDefineForClassFields": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "module": "esnext",
+        "declaration": false,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx",
+        "jsxImportSource": "@emotion/react",
+        "baseUrl": ".",
+        "rootDir": ".",
+        "paths": {
+          "@lidojs/utils/color": ["packages/utils/dist", "packages/utils/src/color"],
+          "@lidojs/utils/keyboard": ["packages/utils/dist", "packages/utils/src/keyboard"],
+          "@lidojs/core": ["packages/core/dist", "packages/core/src"],
+          "@lidojs/color-picker": ["packages/color-picker/dist", "packages/color-picker/src"],
+          "@lidojs/editor": ["packages/editor/dist", "packages/editor/src"],
+          "@lidojs/utils": ["packages/utils/dist", "packages/utils/src"],
+          "@lidojs/screen": ["packages/screen/dist", "packages/screen/src"]
+        }
+    },
+    "include": ["**/*.d.ts", "**/*.ts", "**/*.tsx"],
+    "exclude": ["**/node_modules", "**/dist"]
+}

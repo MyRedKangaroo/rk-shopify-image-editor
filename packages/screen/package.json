@@ -1,0 +1,21 @@
+{
+  "name": "@lidojs/screen",
+  "version": "0.0.3",
+  "type": "module",
+  "types": "dist/packages/screen/src/index.d.ts",
+  "module": "dist/index.js",
+  "scripts": {
+    "clean": "rimraf -rf dist",
+    "build": "npm run clean && rollup -c"
+  },
+  "devDependencies": {
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+  },
+  "peerDependencies": {
+    "react": "^18"
+  }
+}
