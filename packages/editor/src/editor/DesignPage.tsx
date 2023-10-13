@@ -55,21 +55,20 @@ const DesignPage: ForwardRefRenderFunction<HTMLDivElement, PageProps> = (
     const { selectedLayerIds, selectedLayers } = useSelectedLayers();
     const disabled = useDisabledFeatures();
 
-    const { actions, hoveredLayer, scale, activePage, controlBox, imageEditor, textEditor } = useEditor(
-        (state) => {
-            const hoverLayerId = state.hoveredLayer[pageIndex];
-            return {
-                activePage: state.activePage,
-                controlBox: state.controlBox,
-                scale: state.scale,
-                isLocked: state.pages[pageIndex] && state.pages[pageIndex].layers.ROOT.data.locked,
-                hoveredLayer: hoverLayerId ? state.pages[pageIndex].layers[hoverLayerId] : null,
-                selectStatus: state.selectData.status,
-                imageEditor: state.imageEditor,
-                textEditor: state.textEditor,
-                totalPages: state.pages.length,
-            };
-        });
+    const { actions, hoveredLayer, scale, activePage, controlBox, imageEditor, textEditor } = useEditor((state) => {
+        const hoverLayerId = state.hoveredLayer[pageIndex];
+        return {
+            activePage: state.activePage,
+            controlBox: state.controlBox,
+            scale: state.scale,
+            isLocked: state.pages[pageIndex] && state.pages[pageIndex].layers.ROOT.data.locked,
+            hoveredLayer: hoverLayerId ? state.pages[pageIndex].layers[hoverLayerId] : null,
+            selectStatus: state.selectData.status,
+            imageEditor: state.imageEditor,
+            textEditor: state.textEditor,
+            totalPages: state.pages.length,
+        };
+    });
     const openContextMenu = (e: React.MouseEvent) => {
         e.preventDefault();
         if (hoveredLayer && hoveredLayer.data.locked) {
@@ -276,7 +275,22 @@ const DesignPage: ForwardRefRenderFunction<HTMLDivElement, PageProps> = (
 
     return (
         <PageProvider pageIndex={pageIndex}>
-            <button onClick={() => handleDownload(pageIndex)}>download</button>
+            <button
+                css={{
+                    backgroundColor: 'black',
+                    color: 'white',
+                    fontSize: '20px',
+                    padding: '10px 60px',
+                    margin: '20px 0px',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+
+                    display: 'block',
+                }}
+                onClick={() => handleDownload(pageIndex)}
+            >
+                Download
+            </button>
             {/* <div
                 css={{
                     fontWeight: 'bold',
