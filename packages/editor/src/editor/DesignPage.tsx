@@ -263,10 +263,17 @@ const DesignPage: ForwardRefRenderFunction<HTMLDivElement, PageProps> = (
         if (displayRef.current) {
             try {
                 const dataUrl = await toPng(displayRef.current);
-                const link = document.createElement('a');
-                link.download = `design-id-page-${pageIndex + 1}.png`;
-                link.href = dataUrl;
-                link.click();
+                window.parent?.postMessage(
+                    {
+                        type: 'Image Saved',
+                        dataUrl,
+                    },
+                    '*',
+                );
+                // const link = document.createElement('a');
+                // link.download = `design-id-page-${pageIndex + 1}.png`;
+                // link.href = dataUrl;
+                // link.click();
             } catch (e) {
                 window.alert('Cannot download: ' + (e as Error).message);
             }
