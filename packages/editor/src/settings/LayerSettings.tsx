@@ -15,12 +15,13 @@ import FrameSettings from './FrameSettings';
 import { RootLayerProps } from '../layers/RootLayer';
 import { toPng } from 'html-to-image';
 
-const LayerSettings = () => {
+const LayerSettings = ({
+    displayRef
+}) => {
     const { selectedLayers, selectedLayerIds } = useSelectedLayers();
-    const { actions, sidebar, isPageLocked, displayRef } = useEditor((state) => ({
+    const { actions, sidebar, isPageLocked } = useEditor((state) => ({
         sidebar: state.sidebar,
-        isPageLocked: state.pages[state.activePage] && state.pages[state.activePage].layers.ROOT.data.locked,
-        displayRef: state.displayRef,
+        isPageLocked: state.pages[state.activePage] && state.pages[state.activePage].layers.ROOT.data.locked
     }));
 
     const { rootLayer, textLayers, shapeLayers, svgLayers, frameLayers } = useMemo(() => {
@@ -79,6 +80,28 @@ const LayerSettings = () => {
         }
     }, [sidebar, selectedLayerIds]);
 
+    const handleDownload = useCallback(async () => {
+        if (displayRef.current) {
+            try {
+                const dataUrl = await toPng(displayRef.current);
+
+                window.parent?.postMessage(
+                    {
+                        type: 'Image Saved',
+                        dataUrl,
+                    },
+                    '*',
+                );
+                // const link = document.createElement('a');
+                // link.download = `design-id-page-${pageIndex + 1}.png`;
+                // link.href = dataUrl;
+                // link.click();
+            } catch (e) {
+                window.alert('Cannot download: ' + (e as Error).message);
+            }
+        }
+    }, []);
+
     return (
         <div
             css={{
@@ -101,7 +124,17 @@ const LayerSettings = () => {
                 <CommonSettings />
             </div>
 
-            <button>Next</button>
+            <button
+                css={{
+                    background: 'rgba(197, 40, 12, 1)',
+                    color: 'white',
+                    padding: '0.5rem',
+                    borderRadius: '0.5rem',
+                }}
+                onClick={handleDownload}
+            >
+                Proceed to Reward Details
+            </button>
         </div>
     );
 };

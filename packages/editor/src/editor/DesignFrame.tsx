@@ -25,7 +25,7 @@ import { useUsedFont } from '../layers/hooks/useUsedFont';
 interface DesignFrameProps {
     data: SerializedPage[];
 }
-const DesignFrame: FC<DesignFrameProps> = ({ data }) => {
+const DesignFrame: FC<DesignFrameProps> = ({ data, displayRef }) => {
     const shiftKeyRef = useTrackingShiftKey();
     const frameRef = useRef<HTMLDivElement>(null);
     const pageContainerRef = useRef<HTMLDivElement>(null);
@@ -293,6 +293,7 @@ const DesignFrame: FC<DesignFrameProps> = ({ data }) => {
                                             width={pageSize.width}
                                             height={pageSize.height}
                                             transform={pageTransform}
+                                            displayRef={displayRef}
                                         />
                                     </div>
                                 ))}

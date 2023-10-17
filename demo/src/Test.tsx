@@ -12,6 +12,7 @@ import { FontData } from '@lidojs/core';
 const Test = () => {
     const leftSidebarRef = useRef<HTMLDivElement>(null);
     const [openPreview, setOpenPreview] = useState(false);
+    const displayRef = useRef<HTMLDivElement>(null);
 
     const getFonts = useCallback((query: GetFontQuery) => {
         const buildParams = (data: Record<string, string | string[]>) => {
@@ -95,7 +96,7 @@ const Test = () => {
                             overflow: 'auto',
                         }}
                     >
-                        <AppLayerSettings />
+                        <AppLayerSettings displayRef={displayRef} />
                         <div
                             css={{
                                 flexGrow: 1,
@@ -104,7 +105,7 @@ const Test = () => {
                                 flexDirection: 'column',
                             }}
                         >
-                            <EditorContent />
+                            <EditorContent displayRef={displayRef} />
                         </div>
                         <div
                             css={{

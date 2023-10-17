@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-shopifyimageeditor-dev-195413-authRole",
+      "UnauthRoleArn": "arn:aws:iam::082396704250:role/amplify-shopifyimageeditor-dev-195413-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::082396704250:role/amplify-shopifyimageeditor-dev-195413-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-shopifyimageeditor-dev-195413-deployment",
+      "UnauthRoleName": "amplify-shopifyimageeditor-dev-195413-unauthRole",
+      "StackName": "amplify-shopifyimageeditor-dev-195413",
+      "StackId": "arn:aws:cloudformation:us-east-1:082396704250:stack/amplify-shopifyimageeditor-dev-195413/50bcc920-6c7f-11ee-882e-0acf565d6109",
+      "AmplifyAppId": "d2tf3q2mw59sbc"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2tf3q2mw59sbc",
+          "type": "manual"
+        }
+      }
+    }
+  }
+}

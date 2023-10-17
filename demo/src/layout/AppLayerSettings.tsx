@@ -1,7 +1,9 @@
 import React from 'react';
 import { LayerSettings, useSelectedLayers } from '@lidojs/editor';
 
-const AppLayerSettings = () => {
+const AppLayerSettings = ({
+    displayRef
+}) => {
     const { selectedLayerIds } = useSelectedLayers();
     return (
         <div
@@ -24,7 +26,7 @@ const AppLayerSettings = () => {
                 },
             }}
         >
-            <LayerSettings />
+            <LayerSettings displayRef={displayRef} />
         </div>
     );
 };

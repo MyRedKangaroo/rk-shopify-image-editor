@@ -43,11 +43,11 @@ export interface PageProps {
     };
 }
 const DesignPage: ForwardRefRenderFunction<HTMLDivElement, PageProps> = (
-    { pageIndex, width, height, transform },
+    { pageIndex, width, height, transform, displayRef },
     ref,
 ) => {
     const pageRef = useRef<HTMLDivElement>(null);
-    const displayRef = useRef<HTMLDivElement>(null);
+    // const displayRef = useRef<HTMLDivElement>(null);
     const [controlBoxRef] = useLinkedRef<HTMLDivElement>(null);
     const layerBorderRef = useRef<Record<LayerId, HTMLDivElement>>({});
     const [controlBoxData, getControlBoxData, setControlBoxData] = useLinkedRef<BoxData>();
@@ -282,7 +282,7 @@ const DesignPage: ForwardRefRenderFunction<HTMLDivElement, PageProps> = (
 
     return (
         <PageProvider pageIndex={pageIndex}>
-            <button
+            {/* <button
                 css={{
                     backgroundColor: 'black',
                     color: 'white',
@@ -297,7 +297,7 @@ const DesignPage: ForwardRefRenderFunction<HTMLDivElement, PageProps> = (
                 onClick={() => handleDownload(pageIndex)}
             >
                 Download
-            </button>
+            </button> */}
             {/* <div
                 css={{
                     fontWeight: 'bold',
