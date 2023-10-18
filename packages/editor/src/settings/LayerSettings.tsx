@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useCallback } from 'react';
+import React, { useEffect, useMemo, useCallback, useState } from 'react';
 import { useSelectedLayers, useEditor } from '../hooks';
 import { TextLayerProps } from '../layers/TextLayer';
 import TextSettings from './TextSettings';
@@ -14,6 +14,7 @@ import { FrameLayerProps } from '../layers/FrameLayer';
 import FrameSettings from './FrameSettings';
 import { RootLayerProps } from '../layers/RootLayer';
 import { toPng } from 'html-to-image';
+import { RotatingLines } from 'react-loader-spinner';
 
 const LayerSettings = ({
     displayRef
@@ -23,6 +24,7 @@ const LayerSettings = ({
         sidebar: state.sidebar,
         isPageLocked: state.pages[state.activePage] && state.pages[state.activePage].layers.ROOT.data.locked
     }));
+    const [exportLoading, setExportingLoading] = useState(false);
 
     const { rootLayer, textLayers, shapeLayers, svgLayers, frameLayers } = useMemo(() => {
         return selectedLayers.reduce(
@@ -83,7 +85,10 @@ const LayerSettings = ({
     const handleDownload = useCallback(async () => {
         if (displayRef.current) {
             try {
+                setExportingLoading(true);
+                console.log("exportstarted", Date.now());
                 const dataUrl = await toPng(displayRef.current);
+                console.log("exportdone", Date.now());
 
                 window.parent?.postMessage(
                     {
@@ -92,6 +97,7 @@ const LayerSettings = ({
                     },
                     '*',
                 );
+                setExportingLoading(false);
                 // const link = document.createElement('a');
                 // link.download = `design-id-page-${pageIndex + 1}.png`;
                 // link.href = dataUrl;
@@ -131,9 +137,18 @@ const LayerSettings = ({
                     padding: '0.5rem',
                     borderRadius: '0.5rem',
                 }}
-                onClick={handleDownload}
+                onClick={() => !exportLoading && handleDownload()}
             >
-                Proceed to Reward Details
+                {exportLoading ? <RotatingLines
+                        strokeColor="white"
+                        strokeWidth="5"
+                        animationDuration="0.75"
+                        width="16"
+                        visible={true}
+                    />
+                 : (
+                            'Proceed to Reward Details'
+                        )}
             </button>
         </div>
     );

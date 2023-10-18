@@ -22,9 +22,7 @@ const TemplateContent: FC<{ onClose: () => void }> = ({ onClose }) => {
     }, []);
     const addPage = async (data: SerializedPage) => {
         actions.setPage(activePage, data);
-        if (isMobile) {
-            onClose();
-        }
+        onClose();
     };
     return (
         <div
