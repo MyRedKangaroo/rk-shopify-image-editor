@@ -7,7 +7,7 @@ import { useEditor } from '@lidojs/editor';
 import { SerializedPage } from '@lidojs/core';
 interface Template {
     img: string;
-    data: string;
+    data: any;
 }
 const TemplateContent: FC<{ onClose: () => void }> = ({ onClose }) => {
     const [templates, setTemplates] = useState<Template[]>([]);
@@ -16,7 +16,7 @@ const TemplateContent: FC<{ onClose: () => void }> = ({ onClose }) => {
         activePage: state.activePage,
     }));
     useAsync(async () => {
-        const response = await axios.get<Template[]>('/templates');
+        const response = await axios.get<Template[]>('https://api.dev.redkangaroo.me/api/v2/shopify/templates');
         setTemplates(response.data);
         setIsLoading(false);
     }, []);
@@ -84,7 +84,7 @@ const TemplateContent: FC<{ onClose: () => void }> = ({ onClose }) => {
                 >
                     {isLoading && <div>Loading...</div>}
                     {templates.map((item, index) => (
-                        <div key={index} css={{ cursor: 'pointer' }} onClick={() => addPage(JSON.parse(item.data))}>
+                        <div key={index} css={{ cursor: 'pointer' }} onClick={() => addPage(item.data)}>
                             <img src={item.img} loading="lazy" />
                         </div>
                     ))}

@@ -1,5 +1,5 @@
 import Slider from '../common/slider/Slider';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useEditor } from '../hooks';
 import SettingButton from './SettingButton';
 import Popover from '../common/popover/Popover';
@@ -13,6 +13,12 @@ const PageControl = () => {
         totalPages: state.pages.length,
         scale: state.scale,
     }));
+
+    useEffect(() => {
+        setTimeout(() => {
+            actions.setScale(2);
+        }, 1000);
+    }, []);
 
     const handleChangeScale = (value: number) => {
         actions.setScale(value / 100);

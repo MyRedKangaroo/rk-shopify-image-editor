@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import { useSelectedLayers, useEditor } from '../hooks';
 import LayerSidebar from './sidebar/LayerSidebar';
 import SettingButton from './SettingButton';
@@ -25,9 +25,15 @@ const CommonSettings = () => {
         pageSize: state.pageSize,
         isPageLocked: state.pages[state.activePage] && state.pages[state.activePage].layers.ROOT.data.locked,
     }));
-    const [size, setSize] = useState(pageSize);
+
+    console.log("pageSize", pageSize);
+
+    const [size, setSize] = useState({
+        height: 236,
+        width: 332,
+    });
     useEffect(() => {
-        setSize(pageSize);
+        handleResize();
     }, [pageSize]);
     const { transparency } = useMemo(() => {
         return Object.entries(selectedLayers).reduce(
@@ -77,9 +83,12 @@ const CommonSettings = () => {
         setOpenTransparencySetting(false);
     }, [JSON.stringify(selectedLayerIds)]);
 
-    const handleChangeSize = (value: string, type: 'width' | 'height') => {
+    const handleChangeSize = useCallback((value: string, type: 'width' | 'height') => {
         const ratio = size.width / size.height;
         const v = parseInt(value, 10);
+
+        console.log(ratio, v);
+
         if (type === 'width') {
             if (lockSiteAspect) {
                 (heightRef.current as HTMLInputElement).value = String(Math.round((v / ratio) * 10) / 10);
@@ -92,7 +101,7 @@ const CommonSettings = () => {
             }
             setSize({ ...size, height: v });
         }
-    };
+    }, [size]);
 
     const isDisabledResize = useMemo(() => size.width < 100 || size.height < 100, [size]);
 
@@ -119,42 +128,42 @@ const CommonSettings = () => {
                     <Fragment>
                         {(!isRootLayer(selectedLayers[0]) ||
                             (isRootLayer(selectedLayers[0]) && selectedLayers[0].data.props.image)) && (
-                            <Fragment>
-                                <div css={{ height: 24, width: `1px`, background: 'rgba(57,76,96,.15)' }} />
-                                <SettingButton
-                                    ref={transparencyButtonRef}
-                                    css={{ fontSize: 20 }}
-                                    onClick={() => setOpenTransparencySetting(true)}
-                                >
-                                    <TransparencyIcon />
-                                </SettingButton>
-                                <Popover
-                                    open={openTransparencySetting}
-                                    anchorEl={transparencyButtonRef.current}
-                                    placement={'bottom-end'}
-                                    onClose={() => setOpenTransparencySetting(false)}
-                                    offsets={{
-                                        'bottom-end': { x: 0, y: 8 },
-                                    }}
-                                >
-                                    <div css={{ padding: 16 }}>
-                                        <Slider
-                                            label={'Transparency'}
-                                            defaultValue={transparency * 100}
-                                            onChange={updateTransparency}
-                                        />
-                                    </div>
-                                </Popover>
-                            </Fragment>
-                        )}
+                                <Fragment>
+                                    <div css={{ height: 24, width: `1px`, background: 'rgba(57,76,96,.15)' }} />
+                                    <SettingButton
+                                        ref={transparencyButtonRef}
+                                        css={{ fontSize: 20 }}
+                                        onClick={() => setOpenTransparencySetting(true)}
+                                    >
+                                        <TransparencyIcon />
+                                    </SettingButton>
+                                    <Popover
+                                        open={openTransparencySetting}
+                                        anchorEl={transparencyButtonRef.current}
+                                        placement={'bottom-end'}
+                                        onClose={() => setOpenTransparencySetting(false)}
+                                        offsets={{
+                                            'bottom-end': { x: 0, y: 8 },
+                                        }}
+                                    >
+                                        <div css={{ padding: 16 }}>
+                                            <Slider
+                                                label={'Transparency'}
+                                                defaultValue={transparency * 100}
+                                                onChange={updateTransparency}
+                                            />
+                                        </div>
+                                    </Popover>
+                                </Fragment>
+                            )}
                     </Fragment>
                 )}
                 {!isPageLocked && (
                     <Fragment>
                         <div css={{ height: 24, width: `1px`, background: 'rgba(57,76,96,.15)' }} />
-                        <SettingButton ref={resizeButtonRef} onClick={() => setOpenResizeSetting(true)}>
+                        {/* <SettingButton ref={resizeButtonRef} onClick={() => setOpenResizeSetting(true)}>
                             <span css={{ padding: '0 4px' }}>Resize</span>
-                        </SettingButton>
+                        </SettingButton> */}
                     </Fragment>
                 )}
                 <Popover
